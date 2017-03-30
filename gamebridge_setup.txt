@@ -1,0 +1,181 @@
+## GAME BRIDGE SETUP
+## By Travis Kreikemeier
+## Version 4 - 3/25/2017
+
+## show commands:
+ip link
+brctl show
+ebtables -L --Lc --Ln
+
+## The Setup
+apt-get install bridge-utils
+apt-get install ebtables
+
+echo 8021q >> /etc/modules
+
+vi /etc/network/interfaces
+# PUT BELOW IN
+
+# /etc/network/interfaces
+auto eth0
+iface eth0 inet static
+        address 10.10.10.23
+        netmask 255.255.255.0
+        gateway 10.10.10.1
+
+auto eth1.10
+iface eth1.10 inet manual
+
+auto eth1.11
+iface eth1.11 inet manual
+
+auto eth1.101
+iface eth1.101 inet manual
+
+auto eth1.102
+iface eth1.102 inet manual
+
+auto eth1.103
+iface eth1.103 inet manual
+
+auto eth1.104
+iface eth1.104 inet manual
+
+auto eth1.105
+iface eth1.105 inet manual
+
+auto eth1.106
+iface eth1.106 inet manual
+
+auto eth1.107
+iface eth1.107 inet manual
+
+auto eth1.108
+iface eth1.108 inet manual
+
+auto eth1.109
+iface eth1.109 inet manual
+
+auto eth1.110
+iface eth1.110 inet manual
+
+auto eth1.111
+iface eth1.111 inet manual
+
+auto eth1.112
+iface eth1.112 inet manual
+
+auto eth1.113
+iface eth1.113 inet manual
+
+auto eth1.114
+iface eth1.114 inet manual
+
+auto eth1.115
+iface eth1.115 inet manual
+
+auto eth1.116
+iface eth1.116 inet manual
+
+auto eth1.117
+iface eth1.117 inet manual
+
+auto eth1.118
+iface eth1.118 inet manual
+
+auto eth1.119
+iface eth1.119 inet manual
+
+auto eth1.120
+iface eth1.120 inet manual
+
+auto eth1.121
+iface eth1.121 inet manual
+
+auto eth1.122
+iface eth1.122 inet manual
+
+auto eth1.123
+iface eth1.123 inet manual
+
+auto eth1.124
+iface eth1.124 inet manual
+
+auto eth1.125
+iface eth1.125 inet manual
+
+auto eth1.126
+iface eth1.126 inet manual
+
+auto eth1.127
+iface eth1.127 inet manual
+
+auto eth1.128
+iface eth1.128 inet manual
+
+auto eth1.129
+iface eth1.129 inet manual
+
+auto eth1.130
+iface eth1.130 inet manual
+
+auto eth1.131
+iface eth1.131 inet manual
+
+auto eth1.132
+iface eth1.132 inet manual
+
+# auto br0  - We'll manually bring it up after ebtables filtering
+iface br0 inet manual
+        bridge_ports eth1.10 eth1.11 eth1.101 eth1.102 eth1.103 eth1.104 eth1.105 eth1.106 eth1.107 eth1.108 eth1.109 eth1.110 eth1.111 eth1.112 eth1.113 eth1.114 eth1.115 eth1.116 eth1.117 eth1.118 eth1.119 eth1.120 eth1.121 eth1.122 eth1.123 eth1.124 eth1.125 eth1.126 eth1.127 eth1.128 eth1.129 eth1.130 eth1.131 eth1.132
+
+
+# /etc/rc.local
+# Put before exit 0
+ebtables -P FORWARD DROP
+ebtables -F FORWARD
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 1301:1312 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 1716:1727 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 2234:2245 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 2301:2312 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 2350:2360 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 3454:3465 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 3454:3465 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 3657:3668 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 4242:4242 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 5001:5001 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 5120:5131 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 6112:6112 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 7140:7140 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 7776:7788 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 10480:10491 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 10777:10777 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 10999:10999 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 12299:12310 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 14001:14001 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 20099:20110 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 21999:22010 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 23757:23757 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 25299:25310 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 25565:25565 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 25999:26010 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 26001:26011 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 26900:26905 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 27014:27025 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 27215:27215 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 27887:27898 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 27959:27970 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 28069:28080 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 28959:28970 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 29069:29080 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 29252:29263 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 29899:29910 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 30719:30730 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 44400:44410 -j ACCEPT
+ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 58202:58203 -j ACCEPT
+
+ifup br0
+
+# SNAT the Source MAC Address of frames to your bridge interface.
+br0_mac=`cat /sys/class/net/br0/address`
+ebtables -t nat -A POSTROUTING -j snat --to-src $br0_mac --snat-target ACCEPT
