@@ -8,9 +8,9 @@ Gamebridge allows you to carve up your LAN party network into many VLANs.  Usual
 
 # REQUIREMENTS
 * Tested at large LAN events with Debian 8.7 as a guest VMWare ESX 6 - Any other distros may require modeifications
-** Two NICS: One connected to a single VLAN for management
-** The other connected to a trunk port on your switch with all VLANs tagged
-** If using VMWare vSwitch, the trunk port group needs to have VLAN 4095 set so that it passes all VLANs tagged to the guest vNIC.
+* Two NICS: One connected to a single VLAN for management
+* The other connected to a trunk port on your switch with all VLANs tagged
+* If using VMWare vSwitch, the trunk port group needs to have VLAN 4095 set so that it passes all VLANs tagged to the guest vNIC.
 
 # TODO
 * Create installer script to simplify installation
