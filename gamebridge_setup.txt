@@ -1,8 +1,8 @@
 ## GAME BRIDGE SETUP
 ## By Travis Kreikemeier
-## Version 4 - 3/25/2017
+## Version 5 - 4/7/2017
 
-## show commands:
+## show commands: For later troubleshooting and setup validation
 ip link
 brctl show
 ebtables -L --Lc --Ln
@@ -14,7 +14,7 @@ apt-get install ebtables
 echo 8021q >> /etc/modules
 
 vi /etc/network/interfaces
-# PUT BELOW IN
+# PUT BELOW IN /etc/network/interfaces (Customer management IP and add interfaces for all of your network VLANs (example below is 10,11,101-132)
 
 # /etc/network/interfaces
 auto eth0
@@ -131,7 +131,7 @@ iface br0 inet manual
 
 
 # /etc/rc.local
-# Put before exit 0
+# Put the below before exit 0 in /etc/rc.local
 ebtables -P FORWARD DROP
 ebtables -F FORWARD
 ebtables -A FORWARD -d Broadcast -p IPv4 --ip-protocol udp --ip-destination-port 1301:1312 -j ACCEPT
@@ -179,3 +179,7 @@ ifup br0
 # SNAT the Source MAC Address of frames to your bridge interface.
 br0_mac=`cat /sys/class/net/br0/address`
 ebtables -t nat -A POSTROUTING -j snat --to-src $br0_mac --snat-target ACCEPT
+
+## End of /etc/rc.local additions##
+
+## END OF SETUP ##
