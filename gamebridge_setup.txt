@@ -1,13 +1,13 @@
-## GAME BRIDGE SETUP
+## GameBridge Setup
 ## By Travis Kreikemeier
 ## Version 5 - 4/7/2017
 
-## show commands: For later troubleshooting and setup validation
+## show commands: For later troubleshooting and setup validation ##
 ip link
 brctl show
 ebtables -L --Lc --Ln
 
-## The Setup
+## The Setup ##
 apt-get install bridge-utils
 apt-get install ebtables
 
