@@ -1,6 +1,6 @@
 ## GAME BRIDGE SETUP
 ## By Travis Kreikemeier
-## Version 6 - 1/22/2023 for Debian 11
+## Version 6 - 1/22/2023 for Debian 12
 
 
 ## The Setup
